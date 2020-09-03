@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val mBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val mViewModel by lazy { ViewModelProvider(this, MyViewModelFactory(this)).get<ToDoViewModel>() }
 
-    //private var mListToDos = listOf<Todo>()
-    private var mTodoAdapter = ToDoAdapter()
-
+    private val mViewModel2 by lazy { ToDoViewModel(AppResManager(this)) }
     private val mLifecycleOwner = MyLifeCycleOwner()
+
+    private var mTodoAdapter = ToDoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,18 +56,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private fun lifeCycleTest() {
-        val viewModel = ToDoViewModel(AppResManager(this))
-
-        viewModel.mListToDos.observe(mLifecycleOwner, Observer { listToDos ->
+        mViewModel2.mListToDos.observe(mLifecycleOwner, Observer { listToDos ->
             Log.d("androidTest", "$listToDos")
         })
 
-        mLifecycleOwner.start()
+//        mLifecycleOwner.start()
+//        mLifecycleOwner.destory()
 
         Log.d("androidTest","end of test")
 
-        viewModel.addItemIntent.postValue(Unit)
-
+        //mViewModel2.addItemIntent.postValue(Unit)
     }
 
     override fun onClick(v: View?) {
@@ -81,6 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.mBtnAdd2 -> {
                 mViewModel.addItemIntent2.postValue("item")
+               // mViewModel2.addItemIntent.postValue(Unit)
             }
         }
     }
@@ -108,6 +107,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         fun start() {
+            mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        }
+
+        fun onRusme(){
             mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         }
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.example.androidkotlinworkshop.data.Todo
 import com.example.androidkotlinworkshop.resManager.ResManagerInterface
 
-class ToDoViewModel(val resManagerInterface: ResManagerInterface) : ViewModel() {
+class ToDoViewModel(private val resManagerInterface: ResManagerInterface) : ViewModel() {
 
     //var mListToDos: MutableLiveData<List<Todo>> = MutableLiveData(mutableListOf<Todo>(Todo.Title("備忘錄"), Todo.Title("第二的標題")))
 
