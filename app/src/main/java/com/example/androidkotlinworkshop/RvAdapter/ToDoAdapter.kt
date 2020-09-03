@@ -1,4 +1,4 @@
-package com.example.androidkotlinworkshop
+package com.example.androidkotlinworkshop.RvAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidkotlinworkshop.R
+import com.example.androidkotlinworkshop.data.Todo
 import kotlinx.android.synthetic.main.item_todo.view.*
 
 class ToDoAdapter : ListAdapter<Todo, RecyclerView.ViewHolder>(

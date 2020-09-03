@@ -1,4 +1,4 @@
-package com.example.androidkotlinworkshop
+package com.example.androidkotlinworkshop.data
 
 sealed class Todo(val viewType: Int) {
 
