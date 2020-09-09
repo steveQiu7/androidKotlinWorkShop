@@ -8,7 +8,7 @@ class ToDoViewModel(private val resManagerInterface: ResManagerInterface) : View
 
     //var mListToDos: MutableLiveData<List<Todo>> = MutableLiveData(mutableListOf<Todo>(Todo.Title("備忘錄"), Todo.Title("第二的標題")))
 
-    var mCount = 0
+    private var mCount = 0
 
     val addItemIntent = MutableLiveData<Unit>()
     val addItemIntent2 = MutableLiveData<String>()

@@ -16,31 +16,30 @@ import com.example.androidkotlinworkshop.viewModel.ToDoViewModel
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val mBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val mVB by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     private val mViewModel by lazy { ViewModelProvider(this, MyViewModelFactory(this)).get<ToDoViewModel>() }
-
     private val mViewModel2 by lazy { ToDoViewModel(AppResManager(this)) }
-    private val mLifecycleOwner = MyLifeCycleOwner()
 
+    private val mLifecycleOwner = MyLifeCycleOwner()
     private var mTodoAdapter = ToDoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(mBinding.root)
+        setContentView(mVB.root)
         initView()
         lifeCycleTest()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("androidTest","test")
+        Log.d("androidTest", "test")
     }
 
-
     private fun initView() {
-        mBinding.mRvDemo.adapter = mTodoAdapter
-        mBinding.mRvDemo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mBinding.mRvDemo.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        mVB.rvDemo.adapter = mTodoAdapter
+        mVB.rvDemo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mVB.rvDemo.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
 //        mListToDos = mListToDos.toMutableList().apply { add(Todo.Title("備忘錄")) }
 //        mTodoAdapter.submitList(mListToDos)
@@ -50,10 +49,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             mTodoAdapter.submitList(listToDos)
         })
 
-        mBinding.mBtnAdd.setOnClickListener(this)
-        mBinding.mBtnAdd2.setOnClickListener(this)
+        mVB.mBtnAdd.setOnClickListener(this)
+        mVB.mBtnAdd2.setOnClickListener(this)
     }
-
 
 
     private fun lifeCycleTest() {
@@ -61,26 +59,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Log.d("androidTest", "$listToDos")
         })
 
-//        mLifecycleOwner.start()
+        mLifecycleOwner.start()
 //        mLifecycleOwner.destory()
 
-        Log.d("androidTest","end of test")
-
+        Log.d("androidTest", "end of test")
         //mViewModel2.addItemIntent.postValue(Unit)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.mBtnAdd -> {
-                //mListToDos = mListToDos.toMutableList().apply { add(Todo.Item("world", false)) }
-                //mViewModel.addItem("item")
-                //mTodoAdapter.submitList(mViewModel.mListToDos)
+//                mListToDos = mListToDos.toMutableList().apply { add(Todo.Item("world", false)) }
+//                mViewModel.addItem("item")
+//                mTodoAdapter.submitList(mViewModel.mListToDos)
                 mViewModel.addItemIntent.postValue(Unit)
             }
 
             R.id.mBtnAdd2 -> {
                 mViewModel.addItemIntent2.postValue("item")
-               // mViewModel2.addItemIntent.postValue(Unit)
+                //mViewModel2.addItemIntent.postValue(Unit)
             }
         }
     }
@@ -100,7 +97,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      * 可隨意操作生命週期
      */
     class MyLifeCycleOwner : LifecycleOwner {
-
         private val mLifecycleRegistry = LifecycleRegistry(this)
 
         init {
@@ -111,11 +107,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
         }
 
-        fun onRusme(){
+        fun onRusme() {
             mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         }
 
-        fun destory(){
+        fun destory() {
             mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         }
 
