@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("androidTest","test")
     }
 
+
     private fun initView() {
         mBinding.mRvDemo.adapter = mTodoAdapter
         mBinding.mRvDemo.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
